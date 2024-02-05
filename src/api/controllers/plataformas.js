@@ -45,7 +45,7 @@ const putPlataforma = async (req, res, next) => {
     }
 
     const plataformaUpdated = await Plataforma.findByIdAndUpdate(id, newPlataforma, { new: true });
-    return res.status(200), json(plataformaUpdated)
+    return res.status(200).json(plataformaUpdated)
   } catch (error) {
     return res.status(400).json(error)
   }
