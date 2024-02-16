@@ -12,12 +12,17 @@ const getUser = async (req, res, next) => {
 };
 const register = async (req, res, next) => {
   try {
-    const newUser = new User(req.body)
     const duplicateUser = await User.findOne({ userName: req.body.userName });
-
     if (duplicateUser) {
       return res.status(400).json("Usuario en uso! Busca otro nombre")
     };
+
+    const newUser = new User({
+      userName: req.body.userName,
+      password: req.body.password,
+      rol: "user"
+    })
+
     const userSaved = await newUser.save();
     return res.status(200).json(userSaved);
   } catch (error) {
